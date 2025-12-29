@@ -1,11 +1,17 @@
 import streamlit as st
 import pickle
+from PIL import Image
 
-# load model & vectorizer
+# Show logo
+logo = Image.open("logo.png")
+st.image(logo, width=180)
+
+st.title("📧 Email Scam Detection App")
+
+# Load model & vectorizer
 model = pickle.load(open("model.pkl", "rb"))
 cv = pickle.load(open("vectorizer.pkl", "rb"))
 
-st.title("📧 Spam Email Detection App")
 st.write("Enter a message to check whether it is Spam or Ham")
 
 user_input = st.text_area("Enter your message here")
@@ -21,4 +27,5 @@ if st.button("Check"):
             st.error("🚫 This message is SPAM")
         else:
             st.success("✅ This message is HAM (Not Spam)")
+
 
